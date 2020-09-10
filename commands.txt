@@ -1,0 +1,25 @@
+ 
+ 
+
+
+docker network create home
+docker run -d --publish 27017:27017 --network "home"  --name "mongo" mongo:3.6
+docker run -d --network "home" --publish 8080:8080 --name="hack" --env "MONGODB_URI=mongodb://mongo:27017/test" mustjoon/hackathon-starter:0.2
+
+
+
+CLOSE
+docker container kill $(docker ps -q)
+docker container rm $(docker ps -a -q)
+
+
+TAG create
+
+docker build -t mustjoon/hackathon-starter:0.3 .
+
+
+docker commit hack mustjoon/hackathon-starter:0.2
+docker push mustjoon/hackathon-starter:0.2
+
+
+docker tag hack mustjoon/hackathon-starter:0.2
