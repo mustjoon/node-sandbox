@@ -3,6 +3,7 @@ pipeline {
     registry = "mustjoon/hackathon-starter"
     registryCredential = 'dockerhub'
     dockerImage = ''
+    
   }
   agent any
     
@@ -24,7 +25,7 @@ pipeline {
      
     stage('Test') {
       steps {
-         sh 'npm test'
+         sh 'OPENSHIFT_NODEJS_PORT=9000 npm test'
       }
     }
 
