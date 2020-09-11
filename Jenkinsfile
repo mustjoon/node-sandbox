@@ -14,8 +14,7 @@ pipeline {
     
   stages {
         
-    stage('Cloning 
-    Git') {
+    stage('Cloning Git') {
       steps {
         git 'https://github.com/mustjoon/node-sandbox'
       }
@@ -36,6 +35,7 @@ pipeline {
       stage('Building image') {
       steps{
         script {
+       
           dockerImage = docker.build registry + ":$VERSION"
         }
       }
