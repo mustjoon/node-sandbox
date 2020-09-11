@@ -6,8 +6,6 @@ pipeline {
     registryCredential = 'dockerhub'
     dockerImage = ''
     CONTAINER_NAME = "hack"
-    VERSION= sh('npm run get-version')  
-    
   }
  
     
@@ -36,6 +34,7 @@ pipeline {
       stage('Building image') {
       steps{
         script {
+          VERSION= sh('npm run get-version')  
           dockerImage = docker.build registry + ":$VERSION"
         }
       }
@@ -52,6 +51,7 @@ pipeline {
     stage('Deploy to Server') {
       steps{
         script {
+          VERSION= sh('npm run get-version')  
           sh("docker network inspect home >/dev/null 2>&1 || \
               docker network create --driver bridge home")
           sh("docker pull mustjoon/hackathon-starter:$VERSION")
