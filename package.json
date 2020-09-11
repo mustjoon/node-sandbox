@@ -16,7 +16,7 @@
     "start": "node app.js",
     "test": "nyc mocha --timeout=10000 --exit",
     "lint": "eslint \"**/*.js\"",
-    "get-version": "echo $npm_package_version"
+    "get-version": "node -p require('./package.json').version"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.13.1",

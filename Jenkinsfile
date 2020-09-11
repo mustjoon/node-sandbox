@@ -6,7 +6,7 @@ pipeline {
     registryCredential = 'dockerhub'
     dockerImage = ''
     CONTAINER_NAME = "hack"
-    VERSION= sh('node -p "require(`./package.json`).version"')  
+    VERSION= sh('npm run get-version')  
     
   }
  
