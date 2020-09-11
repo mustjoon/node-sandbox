@@ -45,5 +45,14 @@ pipeline {
         }
       }
     }      
+    stage('Deploy to Server') {
+      steps{
+        script {
+          docker.withRegistry( '', registryCredential ) {
+            sh(""" ./scripts/build.sh --version $BUILD_NUMBER""")
+          }
+        }
+      }
+    }      
   }
 }

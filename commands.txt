@@ -72,3 +72,13 @@ apt-get update
 apt-get install docker-ce docker-ce-cli containerd.io
 
 (SOURCE https://docs.docker.com/engine/install/debian/#:~:text=Install%20from%20a%20package&text=Go%20to%20https%3A%2F%2Fdownload,version%20you%20want%20to%20install.)
+
+
+
+JENKINS FIXIT 
+
+JENKINS PANNULLE EI DOKKERIIN
+TEE NÄMÄ:
+sudo chmod 666 /var/run/docker.sock
+https://dzone.com/articles/jenkins-02-changing-home-directory
+https://www.digitalocean.com/community/questions/how-to-fix-docker-got-permission-denied-while-trying-to-connect-to-the-docker-daemon-socket
