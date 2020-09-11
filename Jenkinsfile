@@ -49,7 +49,7 @@ pipeline {
       steps{
         script {
           docker.withRegistry( '', registryCredential ) {
-            sh(""" ./scripts/build.sh --version $BUILD_NUMBER""")
+            sh(""" ./scripts/deploy.sh --version $BUILD_NUMBER""")
           }
         }
       }
