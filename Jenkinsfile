@@ -1,15 +1,17 @@
 pipeline {
+   tools {nodejs "node"}
+  agent any
     environment {
     registry = "mustjoon/hackathon-starter"
     registryCredential = 'dockerhub'
     dockerImage = ''
     CONTAINER_NAME = "hack"
-    VERSION= sh(`node -p "require('./package.json').version"`)
+    VERSION= node -p "require('./package.json').version"
     
   }
-  agent any
+ 
     
-  tools {nodejs "node"}
+ 
     
   stages {
         
