@@ -48,9 +48,7 @@ pipeline {
     stage('Deploy to Server') {
       steps{
         script {
-          docker.withRegistry( '', registryCredential ) {
             sh(""" ./scripts/deploy.sh --version $BUILD_NUMBER""")
-          }
         }
       }
     }      
