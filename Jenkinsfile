@@ -4,7 +4,7 @@ pipeline {
     registryCredential = 'dockerhub'
     dockerImage = ''
     CONTAINER_NAME = "hack"
-    VERSION= node -p "require('./package.json').version"
+    VERSION= sh(`node -p "require('./package.json').version"`)
     
   }
   agent any
