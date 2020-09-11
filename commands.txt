@@ -82,3 +82,7 @@ TEE NÄMÄ:
 sudo chmod 666 /var/run/docker.sock
 https://dzone.com/articles/jenkins-02-changing-home-directory
 https://www.digitalocean.com/community/questions/how-to-fix-docker-got-permission-denied-while-trying-to-connect-to-the-docker-daemon-socket
+
+
+JENKINS FILE RUN SCRIPT FILE:
+ sh(""" ./scripts/deploy.sh --version $BUILD_NUMBER""")

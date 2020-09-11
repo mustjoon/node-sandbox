@@ -48,7 +48,13 @@ pipeline {
     stage('Deploy to Server') {
       steps{
         script {
-            sh(""" ./scripts/deploy.sh --version $BUILD_NUMBER""")
+          sh("docker network create home")
+          sh("docker pull mustjoon/hackathon-starter:$BUILD_NUMBER")
+          sh("docker kill hack")
+          sh("docker rm hack")
+          sh("docker run -d --publish 27017:27017 --network "home"  --name "mongo" mongo:3.6")
+          sh('docker run -d --network "home" --publish 8085:8085 --name="hack" --env "MONGODB_URI=mongodb://mongo:27017/test" mustjoon/hackathon-starter:'"$BUILD_NUMBER")
+         
         }
       }
     }      
