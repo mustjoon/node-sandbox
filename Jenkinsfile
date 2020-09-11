@@ -3,7 +3,13 @@ pipeline {
     registry = "mustjoon/hackathon-starter"
     registryCredential = 'dockerhub'
     dockerImage = ''
-    CONTAINER = "hack"
+    CONTAINER_NAME = "hack"
+    VERSION=$(cat package.json \
+  | grep version \
+  | head -1 \
+  | awk -F: '{ print $2 }' \
+  | sed 's/[",]//g' \
+  | tr -d '[[:space:]]')
     
   }
   agent any
@@ -51,11 +57,11 @@ pipeline {
         script {
           sh("docker network inspect home >/dev/null 2>&1 || \
               docker network create --driver bridge home")
-          sh("docker pull mustjoon/hackathon-starter:$BUILD_NUMBER")
-          sh("(docker stop hack > /dev/null && echo Stopped container hack && \
-            docker rm hack ) 2>/dev/null || true")
+          sh("docker pull mustjoon/hackathon-starter:$VERSION")
+          sh("(docker stop $VERSION > /dev/null && echo Stopped container $VERSION && \
+            docker rm $VERSION ) 2>/dev/null || true")
           sh("docker start mongo || docker run -d --publish 27017:27017 --network 'home'  --name 'mongo' mongo:3.6")
-          sh("docker run -d --network 'home' --publish 8085:8085 --name='hack' --env 'MONGODB_URI=mongodb://mongo:27017/test' --env 'OPENSHIFT_NODEJS_PORT=8085' mustjoon/hackathon-starter:$BUILD_NUMBER")
+          sh("docker run -d --network 'home' --publish 8085:8085 --name='$VERSION' --env 'MONGODB_URI=mongodb://mongo:27017/test' --env 'OPENSHIFT_NODEJS_PORT=8085' mustjoon/hackathon-starter:$VERSION")
          
         }
       }
