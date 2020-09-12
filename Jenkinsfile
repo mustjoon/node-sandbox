@@ -9,7 +9,7 @@ pipeline {
     VERSION = "${PACKAGE_JSON['version']}"
     APP_NAME = "${PACKAGE_JSON['name']}"
     CONTAINER_NAME = "${APP_NAME}"
-   
+    PORT = "8085"
     GIT_URL = "${PACKAGE_JSON['repository']['url']}"
     registry = "mustjoon/$APP_NAME"
   }
@@ -62,7 +62,7 @@ pipeline {
           sh("(docker stop $CONTAINER_NAME > /dev/null && echo Stopped container $CONTAINER_NAME && \
             docker rm $CONTAINER_NAME ) 2>/dev/null || true")
           sh("docker start mongo || docker run -d --publish 27017:27017 --network 'home'  --name 'mongo' mongo:3.6")
-          sh("docker run -d --health-cmd='curl -f http://$HOST/healthcheck'  --health-interval=5s  --network 'home' --publish 8085:8085 --name='$CONTAINER_NAME' --env 'MONGODB_URI=mongodb://mongo:27017/test' --env 'OPENSHIFT_NODEJS_PORT=8085' $registry:$VERSION")
+          sh("docker run -d --health-cmd='curl -f http://$HOST:$PORT/healthcheck'  --health-interval=5s  --network 'home' --publish $PORT:$PORT --name='$CONTAINER_NAME' --env 'MONGODB_URI=mongodb://mongo:27017/test' --env 'OPENSHIFT_NODEJS_PORT=8085' $registry:$VERSION")
          
         }
       }
@@ -70,7 +70,7 @@ pipeline {
      stage('Check that currently running version is correct') {
         steps{
           script {
-            sh("bash ./scripts/health-check.sh -v '$VERSION' -h '$HOST'")
+            sh("bash ./scripts/health-check.sh -v '$VERSION' -h '$HOST' -p '$PORT'")
           }
         }
      }
