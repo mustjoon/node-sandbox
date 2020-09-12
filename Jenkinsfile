@@ -6,9 +6,11 @@ pipeline {
     dockerImage = ''
     PACKAGE_JSON = readJSON file: './package.json'
     VERSION = "${PACKAGE_JSON['version']}"
-    CONTAINER_NAME = "${PACKAGE_JSON['name']}"
+    APP_NAME = "${PACKAGE_JSON['name']}"
+    CONTAINER_NAME = "${APP_NAME}"
+   
     GIT_URL = "${PACKAGE_JSON['repository']['url']}"
-    registry = "mustjoon/$PACKAGE_JSON['name']"
+    registry = "mustjoon/$APP_NAME"
   }
  
     
