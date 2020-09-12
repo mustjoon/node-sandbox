@@ -22,7 +22,7 @@ while test $# -gt 0; do
           esac
 done  
 
-if [ -z "$version" ]; then
+if [ -z "$wantedVersion" ]; then
   wantedVersion="latest"
 fi
 
@@ -47,3 +47,5 @@ then
 fi
 
     echo "Running current version"
+
+$SHELL;
