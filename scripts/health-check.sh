@@ -37,7 +37,7 @@ if [ -z "$port" ]; then
 fi
 
 
-version=$(curl -s "http://$host:$port/health-check" | grep -Pom 1 '"version":"\K[^"]*')
+version=$(/usr/bin/curl -s "http://$host:$port/health-check" | grep -Pom 1 '"version":"\K[^"]*')
 echo "$version"
 
 if [[ "$version" != "$wantedVersion" ]]
