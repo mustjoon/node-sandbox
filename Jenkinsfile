@@ -5,9 +5,10 @@ pipeline {
     registry = "mustjoon/hackathon-starter"
     registryCredential = 'dockerhub'
     dockerImage = ''
-    CONTAINER_NAME = "hack"
     PACKAGE_JSON = readJSON file: './package.json'
     VERSION = "${PACKAGE_JSON['version']}"
+    CONTAINER_NAME = "${PACKAGE_JSON['name']}"
+    GIT_URL = "${PACKAGE_JSON['repository']['url]}"
   }
  
     
@@ -18,7 +19,7 @@ pipeline {
     stage('Setup') {
       steps {
         script {
-          git 'https://github.com/mustjoon/node-sandbox'
+          git "$GIT_URL"
         }
         script {
           sh ('npm install')

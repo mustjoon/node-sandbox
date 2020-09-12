@@ -1,15 +1,14 @@
 {
-  "name": "hackathon-starter",
+  "name": "node-sandbox",
   "version": "6.0.2",
   "description": "A boilerplate for Node.js web applications",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sahat/hackathon-starter.git"
+    "url": "https://github.com/mustjoon/node-sandbox"
   },
   "license": "MIT",
-  "author": "Sahat Yalkabov",
+  "author": "Joonas Mustonen",
   "contributors": [
-    "Yashar Fakhari (https://github.com/YasharF)"
   ],
   "scripts": {
     "postinstall": "npm rebuild node-sass",
