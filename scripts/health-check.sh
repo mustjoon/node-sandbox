@@ -5,6 +5,11 @@ while test $# -gt 0; do
                     wantedVersion=$1
                     shift
                     ;;
+                 -h)
+                    shift
+                    host=$1
+                    shift
+                    ;;
                 *)
                    echo "$1 is not a recognized flag!"
                     exit 64
@@ -14,6 +19,11 @@ done
 
 if [ -z "$version" ]; then
   wantedVersion="latest"
+fi
+
+if [ -z "$host" ]; then
+  echo "host is required flag!"
+    exit 64
 fi
 
 
