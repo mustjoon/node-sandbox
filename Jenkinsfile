@@ -2,13 +2,13 @@ pipeline {
   tools {nodejs "node"}
   agent any
     environment {
-    registry = "mustjoon/hackathon-starter"
     registryCredential = 'dockerhub'
     dockerImage = ''
     PACKAGE_JSON = readJSON file: './package.json'
     VERSION = "${PACKAGE_JSON['version']}"
     CONTAINER_NAME = "${PACKAGE_JSON['name']}"
     GIT_URL = "${PACKAGE_JSON['repository']['url']}"
+    registry = "mustjoon/$PACKAGE_JSON['name']"
   }
  
     
