@@ -8,7 +8,7 @@ pipeline {
     registryCredential = 'dockerhub'
     dockerImage = ''
     CONTAINER_NAME = "hack"
-    VERSION = PACKAGE_JSON["version"]
+    VERSION = ''
   }
  
     
@@ -23,6 +23,9 @@ pipeline {
         }
         script {
           sh ('npm install')
+        }
+        script {
+          VERSION = PACKAGE_JSON["version"]
         }
       }
     }
