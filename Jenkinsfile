@@ -19,7 +19,7 @@ pipeline {
     stage('Setup') {
       steps {
         git 'https://github.com/mustjoon/node-sandbox'
-        sh 'npm install'
+        sh ('npm install')
         VERSION = PACKAGE_JSON["version"]
       }
     }
