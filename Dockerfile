@@ -1,5 +1,8 @@
 FROM node:12-slim
 
+RUN apt-get update && apt-get install -y \
+curl
+
 WORKDIR /starter
 ENV NODE_ENV development
 
