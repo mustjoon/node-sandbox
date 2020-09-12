@@ -62,17 +62,17 @@ pipeline {
           sh("(docker stop $CONTAINER_NAME > /dev/null && echo Stopped container $CONTAINER_NAME && \
             docker rm $CONTAINER_NAME ) 2>/dev/null || true")
           sh("docker start mongo || docker run -d --publish 27017:27017 --network 'home'  --name 'mongo' mongo:3.6")
-          sh("docker run -d --health-cmd='curl -f http://$HOST:$PORT/health-check'  --health-interval=5s  --network 'home' --publish $PORT:$PORT --name='$CONTAINER_NAME' --env 'MONGODB_URI=mongodb://mongo:27017/test' --env 'OPENSHIFT_NODEJS_PORT=8085' $registry:$VERSION")
+          sh("docker run -d --health-cmd='curl -f http://localhost:$PORT/health-check'  --health-interval=5s  --network 'home' --publish $PORT:$PORT --name='$CONTAINER_NAME' --env 'MONGODB_URI=mongodb://mongo:27017/test' --env 'OPENSHIFT_NODEJS_PORT=8085' $registry:$VERSION")
          
         }
       }
     }
      stage('Check that currently running version is correct') {
         steps{
-           retry(2) {
+           retry(5) {
               script {
-                sleep(2)
                 sh("bash ./scripts/health-check.sh -v '$VERSION' -h '$HOST' -p '$PORT'")
+                sleep(2)
               }
            }
         }
