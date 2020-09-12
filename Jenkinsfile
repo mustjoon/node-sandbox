@@ -71,7 +71,7 @@ pipeline {
         steps{
            retry(2) {
               script {
-                sleep(2000)
+                sleep(2)
                 sh("bash ./scripts/health-check.sh -v '$VERSION' -h '$HOST' -p '$PORT'")
               }
            }
