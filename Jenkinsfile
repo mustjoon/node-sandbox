@@ -6,6 +6,8 @@ pipeline {
     registryCredential = 'dockerhub'
     dockerImage = ''
     CONTAINER_NAME = "hack"
+    props = readJSON file: './package.json'
+    VERSION = props["version"]
   }
  
     
