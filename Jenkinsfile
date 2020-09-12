@@ -6,24 +6,20 @@ pipeline {
     registryCredential = 'dockerhub'
     dockerImage = ''
     CONTAINER_NAME = "hack"
-    def = readJSON file: './package.json'
-    VERSION = PACKAGE_JSON["version"]
+    VERSION = ""
   }
  
     
  
     
   stages {
-        
-    stage('Cloning Git') {
+
+    stage('Setup') {
       steps {
         git 'https://github.com/mustjoon/node-sandbox'
-      }
-    }
-        
-    stage('Install dependencies') {
-      steps {
         sh 'npm install'
+        def = readJSON file: './package.json'
+        VERSION = PACKAGE_JSON["version"]
       }
     }
      
