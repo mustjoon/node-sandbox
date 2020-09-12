@@ -68,8 +68,9 @@ pipeline {
       }
     }
      stage('Check that currently running version is correct') {
-       def retryAttempt = 0
+     
         steps{
+          def retryAttempt = 0
            retry(2) {
               script {
                 if (retryAttempt > 0) {
