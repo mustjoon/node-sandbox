@@ -1,5 +1,7 @@
+def PACKAGE_JSON = readJSON file: './package.json'
+
 pipeline {
-   tools {nodejs "node"}
+  tools {nodejs "node"}
   agent any
     environment {
     registry = "mustjoon/hackathon-starter"
@@ -18,7 +20,6 @@ pipeline {
       steps {
         git 'https://github.com/mustjoon/node-sandbox'
         sh 'npm install'
-        def = readJSON file: './package.json'
         VERSION = PACKAGE_JSON["version"]
       }
     }
