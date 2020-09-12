@@ -48,4 +48,3 @@ fi
 
     echo "Running current version"
 
-$SHELL;

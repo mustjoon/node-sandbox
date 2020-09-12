@@ -5,7 +5,7 @@ pipeline {
     registryCredential = 'dockerhub'
     dockerImage = ''
     PACKAGE_JSON = readJSON file: './package.json'
-    HOST = "localhost"
+    HOST = "167.71.56.231"
     VERSION = "${PACKAGE_JSON['version']}"
     APP_NAME = "${PACKAGE_JSON['name']}"
     CONTAINER_NAME = "${APP_NAME}"
