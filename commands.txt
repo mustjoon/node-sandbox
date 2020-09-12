@@ -44,3 +44,7 @@ PLUGARIT:
  NodeJS
  Docker build
  Pipeline Utility Steps
+
+
+ WEBHOOKS
+ https://www.fourkitchens.com/blog/article/trigger-jenkins-builds-pushing-github/
