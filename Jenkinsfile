@@ -33,7 +33,7 @@ pipeline {
      
     stage('Test') {
       steps {
-         sh 'OPENSHIFT_NODEJS_PORT=9000 npm test'
+         sh 'PORT=9000 npm test'
       }
     }
 
