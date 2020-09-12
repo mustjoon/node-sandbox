@@ -1,4 +1,5 @@
 def PACKAGE_JSON = readJSON file: './package.json'
+def VERSION = PACKAGE_JSON["version"]
 
 pipeline {
   tools {nodejs "node"}
@@ -8,7 +9,6 @@ pipeline {
     registryCredential = 'dockerhub'
     dockerImage = ''
     CONTAINER_NAME = "hack"
-    VERSION = ''
   }
  
     
@@ -23,9 +23,6 @@ pipeline {
         }
         script {
           sh ('npm install')
-        }
-        script {
-          VERSION = PACKAGE_JSON["version"]
         }
       }
     }
