@@ -7,7 +7,7 @@ while test $# -gt 0; do
                     ;;
                 *)
                    echo "$1 is not a recognized flag!"
-                   return 1;
+                    exit 64
                    ;;
           esac
 done  
