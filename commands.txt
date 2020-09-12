@@ -48,3 +48,8 @@ PLUGARIT:
 
  WEBHOOKS
  https://www.fourkitchens.com/blog/article/trigger-jenkins-builds-pushing-github/
+
+
+ ACCESS SERVERWITHOUT PASSWORD
+ 
+ cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
