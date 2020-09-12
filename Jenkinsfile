@@ -68,10 +68,16 @@ pipeline {
       }
     }
      stage('Check that currently running version is correct') {
+       def retryAttempt = 0
         steps{
-          script {
-            sh("bash ./scripts/health-check.sh -v '$VERSION' -h '$HOST' -p '$PORT'")
-          }
+           retry(2) {
+              script {
+                if (retryAttempt > 0) {
+                    sleep(1000 * 2 + 2000 * retryAttempt)
+                }
+                sh("bash ./scripts/health-check.sh -v '$VERSION' -h '$HOST' -p '$PORT'")
+              }
+           }
         }
      }
   }
