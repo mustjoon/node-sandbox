@@ -8,7 +8,7 @@ pipeline {
     registryCredential = 'dockerhub'
     dockerImage = ''
     CONTAINER_NAME = "hack"
-    VERSION = ""
+    VERSION = PACKAGE_JSON["version"]
   }
  
     
@@ -20,8 +20,9 @@ pipeline {
       steps {
         script {
           git 'https://github.com/mustjoon/node-sandbox'
+        }
+        script {
           sh ('npm install')
-          VERSION = PACKAGE_JSON["version"]
         }
       }
     }
