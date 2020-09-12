@@ -69,7 +69,7 @@ pipeline {
      stage('Check that currently running version is correct') {
         steps{
           script {
-            sh('./scripts/build.sh')
+            sh("./scripts/health-check.sh --version='$VERSION'")
           }
         }
      }
