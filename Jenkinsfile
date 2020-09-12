@@ -6,8 +6,7 @@ pipeline {
     registryCredential = 'dockerhub'
     dockerImage = ''
     CONTAINER_NAME = "hack"
-    props = readJSON file: './package.json'
-    VERSION = props["version"]
+    PACKAGE_JSON = readJSON file: './package.json'
   }
  
     
@@ -36,7 +35,7 @@ pipeline {
       stage('Building image') {
       steps{
         script {
-          VERSION = sh("node -p `require('./package.json').version`")
+          VERSION = PACKAGE_JSON["version"]
           dockerImage = docker.build registry + ":$VERSION"
         }
       }
@@ -53,7 +52,7 @@ pipeline {
     stage('Deploy to Server') {
       steps{
         script {
-          VERSION = sh("node -p `require('./package.json').version`")
+          VERSION = PACKAGE_JSON["version"]
           sh("docker network inspect home >/dev/null 2>&1 || \
               docker network create --driver bridge home")
           sh("docker pull mustjoon/hackathon-starter:$VERSION")
